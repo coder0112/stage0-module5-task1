@@ -128,25 +128,25 @@ public class ArrayTasks {
      * arr = [[5, 4], [7]]       -> [[7], [4, 5]]
      */
     public int[][] sortRaggedArray(int[][] arr) {
-        int n = arr.length;
-        for (int i = 0; i < n; i++) {
-            int m = arr[i].length;
-            for (int j = 0; j < m - 1; j++) {
-                for (int k = j + 1; k < m; k++) {
-                    if (arr[i][j] > arr[i][k]) {
-                        int r = arr[i][j];
-                        arr[i][j] = arr[i][k];
-                        arr[i][k] = r;
-                    }
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j].length > arr[j + 1].length) {
+                    int[] temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
                 }
             }
         }
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = i + 1; j < n; j++) {
-                if (arr[i].length > arr[j].length) {
-                    int a[] = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = a;
+
+        // Sort the elements within each sub-array using another bubble sort
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length - 1; j++) {
+                for (int k = 0; k < arr[i].length - j - 1; k++) {
+                    if (arr[i][k] > arr[i][k + 1]) {
+                        int temp = arr[i][k];
+                        arr[i][k] = arr[i][k + 1];
+                        arr[i][k + 1] = temp;
+                    }
                 }
             }
         }
